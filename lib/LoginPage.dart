@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(width:10),
                   ElevatedButton(
                     onPressed: () {
-                      
+
                       Navigator.pushNamed(context, '/sign');
                     },
                     child: const Text("Sign up"),

@@ -1,16 +1,12 @@
-# login
+# Madcamp_Week2_Frontend
 
-A new Flutter project.
+### 현재 완료된 것
+- Login화면
+- 회원가입 화면
+- 피드 infinitescroll
+- BottomNaviationBar
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### TODO:
+- Flutter Splash: 4x pixel image 만들어서 시험해보기
+- Profile page 설정
+- 회원가입 UI (container width 설정했는데 이러는 이유를 아직 모르겠음)
