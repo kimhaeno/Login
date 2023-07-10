@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 class SignPage extends StatelessWidget {
   SignPage({ Key? key }) : super(key: key);
 
-  final String serverUrl = "";
-
   final nicknameController = TextEditingController();
   final phoneController = TextEditingController();
   final mailController = TextEditingController();
@@ -16,39 +14,62 @@ class SignPage extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: [
-          Text("회원가입"),
-          const SizedBox(height:10),
-          Container(
-            width: 300,
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+
+          SizedBox(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("별명"),
-                const SizedBox(height:10),
-                TextField(
-                  controller: nicknameController,
-                  maxLength: 20,
+                const SizedBox(height:60),
+                const Text("새로운 패션의 물결,\n FaSNS에 오신 것을 환영합니다.",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        color: Colors.blue
+                    )
+                ),
+                const SizedBox(height:20),
+                const Text("별명"),
+                const SizedBox(height:10,),
+                SizedBox(
+                  width: 300,
+                  child: TextField(
+                    controller: nicknameController,
+                    maxLength: 20,
+
+                  ),
                 ),
                 const SizedBox(height:10),
-                Text("전화번호"),
+                const Text("전화번호"),
                 const SizedBox(height:10),
-                TextField(
-                  controller: phoneController,
-                  maxLength: 11,
+                SizedBox(
+                  width: 300,
+                  child: TextField(
+                    controller: phoneController,
+                    maxLength: 11,
+                  ),
                 ),
                 const SizedBox(height:10),
-                Text("이메일"),
+                const Text("이메일"),
                 const SizedBox(height:10),
-                TextField(
-                  controller: mailController,
+                SizedBox(
+                  width: 300,
+                  child: TextField(
+                    controller: mailController,
+                  ),
                 ),
-                const SizedBox(height:10),
-                OutlinedButton(
+                const SizedBox(height:60),
+                TextButton(
+
                   onPressed: (){
 
                   },
-                  child: Text("가입"),
+                  child: const Text(
+                    "가입",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black
+                    ),
+                  ),
                 )
               ]
             ),
