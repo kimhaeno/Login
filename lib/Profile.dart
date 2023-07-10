@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login/PhotoGridView.dart';
 
 class Profile extends StatefulWidget {
   const Profile({ Key? key }) : super(key: key);
@@ -13,29 +14,65 @@ class _Profile extends State<Profile> {
   Widget build(BuildContext context){
 
     return Scaffold(
-      appBar: AppBar(title: const Text("나의 프로필"),),
-      body:Stack(
+      body: Column(
         children: [
           Container(
-            width: MediaQuery.of(context).size.width,
-            height: 200,
-            child: Image.asset(
-              "assets/images/profbg.jpg",
-              fit: BoxFit.cover
+            height: 285,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.7),
+                  spreadRadius: 0,
+                  blurRadius: 7,
+                  offset: Offset(0, 10),
+                )
+              ]
+            ),
+            child: Stack(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 200,
+                  child: Image.asset(
+                    "assets/images/profbg.jpg",
+                    fit: BoxFit.cover
+                  ),
+                ),
+                Positioned(
+                  top: 150,
+                  left: MediaQuery.of(context).size.width / 2 - 50,
+                  child: Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Image.asset(
+                          "assets/images/profile_default.png",
+                          height: 100,
+                          width: 100,
+                        )
+                      ),
+                      SizedBox(height: 10),
+                      Text("김현호"),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: 10,
+                  left: 20,
+                  child: Text(
+                    "누군가의 프로필",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          Positioned.fill(
-            top: 200,
-            child: Align(
-              alignment:Alignment.center,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: Image.asset("assets/images/profile_default.png",
-                  width: 100,
-                )
-              ),
-            ),
-          )
+          Expanded(child: PhotoGridView()),
         ],
       )
     );

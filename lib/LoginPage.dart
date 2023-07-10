@@ -98,7 +98,12 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ],
-                  )
+                  ),
+                  SizedBox(height: 10),
+                  OutlinedButton(
+                      onPressed: () {},
+                      child: Text("구글 로그인")
+                  ),
                 ],
               ),
           ),

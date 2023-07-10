@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:login/PostDetailedPage.dart';
 
 class PostView extends StatelessWidget {
   const PostView({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PostDetailedPage()),
+        );
+      },
       child: Container(
         alignment: Alignment.center,
         color: Colors.black,
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        width: MediaQuery.of(context).size.width * 0.8,
+        width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Container(
                 color: Colors.greenAccent,
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: MediaQuery.of(context).size.height *0.7,
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height *0.6,
                 child: Image.asset(
                   'assets/images/sample1.jpg',
                   fit: BoxFit.cover,
@@ -87,8 +93,7 @@ class PostView extends StatelessWidget {
             ),
           ],
         ),
-      )
-
+      ),
     );
   }
 }

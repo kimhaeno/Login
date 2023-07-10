@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:login/Feed.dart';
 import 'package:login/Profile.dart';
 import 'package:login/AddPost.dart';
+import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({ Key? key }) : super(key: key);
@@ -16,12 +17,26 @@ class _HomePage extends State<HomePage> {
   int tabIndex = 0;
   List<Widget> tabList = [Feed(), Profile()];
 
+  DateTime? _currentBackPressTime;
+
+  Future<bool> _onWillPop() async {
+    DateTime now = DateTime.now();
+    if (_currentBackPressTime == null ||
+        now.difference(_currentBackPressTime!) > Duration(seconds: 2)) {
+      _currentBackPressTime = now;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('뒤로가기 버튼을 한 번 더 누르면 종료됩니다.')),
+      );
+      return false;
+    }
+    SystemNavigator.pop();
+    return true;
+  }
+
   @override
   Widget build (BuildContext context) {
     return WillPopScope(
-      onWillPop: ()  {
-        return Future(() => false); //뒤로가기 막음
-      },
+      onWillPop: _onWillPop,
       child: Scaffold(
           body: tabList[tabIndex],
           bottomNavigationBar: BottomNavigationBar(
@@ -43,11 +58,11 @@ class _HomePage extends State<HomePage> {
 
             borderRadius: BorderRadius.circular(20),
           ),
-          onPressed: () {/*
+          onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AddPost()),
-            );*/
+              MaterialPageRoute(builder: (context) => UploadPhotoScreen()),
+            );
           },
           backgroundColor: const Color(0xffffffff),
           foregroundColor: Colors.greenAccent,

@@ -34,16 +34,14 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/' : (context) => LoginPage(),
-          '/sign' : (context) => SignPage(),
-          '/home' : (context) => HomePage(),
+          '/': (context) => LoginPage(),
+          '/sign': (context) => SignPage(),
+          '/home': (context) => HomePage(),
         },
       ),
     );
   }
 }
-
-
 
 
 
