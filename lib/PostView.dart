@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:login/PostDetailedPage.dart';
+import 'package:login/PostPreviewInfo.dart';
 
 class PostView extends StatelessWidget {
-  const PostView({ Key? key }) : super(key: key);
+  PostView({
+    Key? key,
+    required this.info
+  }) : super(key: key);
+
+  late PostPreviewInfo info;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +33,7 @@ class PostView extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: MediaQuery.of(context).size.height *0.6,
                 child: Image.asset(
-                  'assets/images/sample1.jpg',
+                  info.photo,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -49,7 +55,7 @@ class PostView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.asset(
-                            'assets/images/profile_default.png',
+                            info.profile,
                             width: 50,
                             height: 50,
                           ),
@@ -58,7 +64,7 @@ class PostView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "김현호",
+                                info.name,
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -67,7 +73,7 @@ class PostView extends StatelessWidget {
                               ),
                               SizedBox(height: 5,),
                               Text(
-                                "2023.07.10",
+                                info.date,
                                 style: TextStyle(
                                   fontSize: 15,
                                   color: Colors.white,
@@ -80,7 +86,7 @@ class PostView extends StatelessWidget {
                       ),
                       SizedBox(height: 10,),
                       Text(
-                        "입력할 글의 내용",
+                        info.body,
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.white,

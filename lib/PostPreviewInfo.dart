@@ -4,4 +4,12 @@ class PostPreviewInfo {
   late String name;
   late String date;
   late String body;
+
+
+  PostPreviewInfo ({required this.photo,
+    required this.profile,
+    required this.name,
+    required this.date,
+    required this.body});
+
 }

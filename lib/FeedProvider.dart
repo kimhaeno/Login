@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:login/PostPreviewInfo.dart';
 
 class FeedProvider extends ChangeNotifier {
-  List<String> items = [];
+  List<PostPreviewInfo> items = [];
   int currentIndex = 0;
   bool isMore = false;
 
@@ -13,8 +14,13 @@ class FeedProvider extends ChangeNotifier {
       notifyListeners();
       Future.delayed(Duration(milliseconds: isStart ? 0 : 2000), () {
         for (int i = 0; i < 3; i++) {
-          items
-              .add('https://picsum.photos/id/${i + currentIndex + 50}/300/400');
+          items.add(PostPreviewInfo(
+              photo: 'assets/images/sample1.jpg',
+              profile: 'assets/images/profile_default.png',
+              name: '김현호',
+              date: '2023.07.11',
+              body: '내용을 입력'
+          ));
         }
         currentIndex = currentIndex + 3;
         isMore = false;
@@ -31,7 +37,13 @@ class FeedProvider extends ChangeNotifier {
 
   Future<void> started() async {
     for (int i = 0; i < 20; i++) {
-      items.add('https://picsum.photos/id/$i/200/200');
+      items.add(PostPreviewInfo(
+          photo: 'assets/images/sample1.jpg',
+          profile: 'assets/images/profile_default.png',
+          name: '김현호',
+          date: '2023.07.11',
+          body: '내용을 입력'
+      ));
     }
     currentIndex = 20;
   }
@@ -42,7 +54,13 @@ class FeedProvider extends ChangeNotifier {
       notifyListeners();
       Future.delayed(const Duration(milliseconds: 3000), () {
         for (int i = 0; i < 20; i++) {
-          items.add('https://picsum.photos/id/${i + currentIndex}/200/200');
+          items.add(PostPreviewInfo(
+              photo: 'assets/images/sample1.jpg',
+              profile: 'assets/images/profile_default.png',
+              name: '김현호',
+              date: '2023.07.11',
+              body: '내용을 입력'
+          ));
         }
         currentIndex = currentIndex + 20;
         isMore = false;

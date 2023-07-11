@@ -2,19 +2,34 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login/WearInfo.dart';
+import 'package:provider/provider.dart';
 
 class UploadPhotoScreen extends StatefulWidget {
   @override
   _UploadPhotoScreenState createState() => _UploadPhotoScreenState();
 }
 
+class AddPostState extends ChangeNotifier {
+  var wearList = List<WearInfo>.empty(growable: true);
+  final brandController = TextEditingController();
+  final wearController = TextEditingController();
+  WearType? selectedWearType;
+  final _wearTypes = ['상의', '하의', '신발', '아우터', '액세서리', '모자',];
+
+  void setWearType(WearType t){
+    selectedWearType = t;
+    notifyListeners();
+  }
+
+  void addList(WearInfo info){
+    wearList.add(info);
+    notifyListeners();
+  }
+
+}
+
 class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
   File? _image;
-
-  List<int> wearList = List<int>.filled(5,0,growable: true);
-
-
-
 
   Future<void> _uploadImage() async {
     if (_image == null) {
@@ -66,76 +81,120 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
   @override
   Widget build(BuildContext context) {
 
+    var routeState = context.watch<AddPostState>();
+    var wearList = routeState.wearList;
+    var selectedWearType = routeState.selectedWearType;
 
+    return ChangeNotifierProvider(
+      create: (context) => AddPostState(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('게시글 업로드'),
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            alignment: Alignment.center,
+            margin: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Stack(
+                  children: [ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      child: Container(
+                        height: 350,
+                        alignment: Alignment.center,
+                        child: _image != null ? Image.file(_image!, fit: BoxFit.cover,) :
+                        Text(
+                          '이미지를 선택해 주세요!',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      height: 400,
+                      color: Colors.black,
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('게시글 업로드'),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          alignment: Alignment.center,
-          margin: EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  alignment: Alignment.center,
-                  child: _image != null ? Image.file(_image!, fit: BoxFit.cover,) :
-                  Text(
-                    '이미지를 선택해 주세요!',
-                    style: TextStyle(
-                      color: Colors.white,
                     ),
                   ),
-                  height: 400,
-                  width: MediaQuery.of(context).size.width - 40,
-                  color: Colors.black,
-
+                  Positioned(
+                    bottom: 10,
+                    child: rrButton(
+                        pressFunc: _getImageFromGallery,
+                        text: '갤러리에서 이미지 선택'
+                    ),
+                  ),
+                  ]
                 ),
-              ),
-              SizedBox(height: 10,),
-              rrButton(
-                pressFunc: _getImageFromGallery,
-                text: '갤러리에서 이미지 선택'
-              ),
-              SizedBox(height: 10,),
-              Expanded(
-                child: ClipRRect(
+                SizedBox(height: 10,),
+                ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: ListView.builder(
-                    itemCount: wearList.length + 1,
-                    itemBuilder: (BuildContext context, int index) {
-                      if(index == wearList.length){
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Container(
-                            color: Colors.black,
-                            height: 30,
-                          ),
-                        );
+                  child: Container(
+                    color: Colors.black,
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(10),
+                      shrinkWrap: true,
+                      itemCount: wearList.length+1,
+                      itemBuilder: (BuildContext context, int index) {
+                        if(index == wearList.length){
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                  routeState.setWearType(WearType.top);
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: true,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        content: AddWear(),
+                                        insetPadding: const EdgeInsets.all(5),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              routeState.addList(WearInfo(
+                                                  wearType: routeState
+                                                      .selectedWearType!,
+                                                  brandName: routeState
+                                                      .brandController.text,
+                                                  wearName: routeState
+                                                      .wearController.text));
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text("의상 추가"),
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  );
+                                });
+                              },
+                            child: Container(
+                              height: 70,
+                              padding: const EdgeInsets.all(5),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Container(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        else{
+                          return wearWidget(info: wearList[index]);
+                        }
                       }
-                      else{
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Container(
-                            color: Colors.blue,
-                            height: 30,
-                          ),
-                        );
-                      }
-                    }
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 10,),
-              rrButton(
-                pressFunc: _uploadImage,
-                text: '게시글 업로드',
-              ),
-            ],
+                SizedBox(height: 10,),
+                rrButton(
+                  pressFunc: _uploadImage,
+                  text: '게시글 업로드',
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -159,7 +218,7 @@ class rrButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: Container(
         color: Colors.black,
-        width: MediaQuery.of(context).size.width - 40,
+        width: MediaQuery.of(context).size.width,
         child: TextButton(
           onPressed: pressFunc,
           child: Text(
@@ -168,6 +227,101 @@ class rrButton extends StatelessWidget {
               color: Colors.white,
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class wearWidget extends StatelessWidget{
+  wearWidget({Key? key, required this.info}) : super(key: key);
+  final WearInfo info;
+
+  @override
+  Widget build(BuildContext context){
+    return Container(
+      height: 70,
+      padding: const EdgeInsets.all(5),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Container(
+          padding: const EdgeInsets.all(5),
+          color: Colors.white,
+          child: Row(
+            children: [
+              Container(
+                width: 60,
+                height: 60,
+                child: Image.asset(
+                  "assets/images/${info.wearType.toString().split('.')[1]}_b.png",
+                  fit:BoxFit.fill
+                ),
+              ),
+              Column(
+                children: [
+                  Text(info.brandName),
+                  const SizedBox(height: 10),
+                  Text(info.wearName),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+}
+
+class AddWear extends StatefulWidget{
+  const AddWear({Key? key}) : super(key: key);
+
+  @override
+  State<AddWear> createState() => _AddWearState();
+}
+
+class _AddWearState extends State<AddWear> {
+
+
+  @override
+  Widget build(BuildContext context) {
+    var routeState = context.watch<AddPostState>();
+    var wearTypes = routeState._wearTypes;
+    var selectedWearType = routeState.selectedWearType;
+
+
+    return Container(
+      padding: EdgeInsets.all(10),
+      height: 290,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("의상 정보를 등록해 주세요!"),
+            DropdownButton(
+              value: selectedWearType,
+              items: WearType.values.map((WearType wearType) {
+                return DropdownMenuItem(
+                  value: wearType,
+                  child: Text(wearTypes[wearType.index]),
+                );
+              }).toList(),
+              onChanged: (value) {
+                routeState.setWearType(value!);
+              },
+            ),
+            Text("브랜드명"),
+            SizedBox(height:10),
+            TextField(
+              controller: routeState.brandController,
+            ),
+            SizedBox(height:10),
+            Text("옷 이름"),
+            SizedBox(height:10),
+            TextField(
+              controller: routeState.wearController,
+            ),
+          ],
         ),
       ),
     );
