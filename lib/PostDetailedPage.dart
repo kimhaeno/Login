@@ -17,7 +17,14 @@ class _PostDetailedPageState extends State<PostDetailedPage> {
         title: Text("??님의 게시물"),
       ),
       body: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
 
+            ),
+          )
+        ],
       )
     );
   }

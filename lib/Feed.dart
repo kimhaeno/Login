@@ -26,9 +26,10 @@ class _Feed extends State<Feed> {
               children: [
                 Expanded(
                   child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
                       itemCount: value.items.length,
                       itemBuilder: (context, index) {
-                        return Column(
+                        return Row(
                           children: [
                             Container(
                               padding: const EdgeInsets.symmetric(
@@ -40,7 +41,7 @@ class _Feed extends State<Feed> {
                             ),
                             if (value.isMore && value.currentIndex == index + 1) ...[
                               const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10),
+                                padding: EdgeInsets.symmetric(horizontal: 10),
                                 child: CircularProgressIndicator(
                                   color: Colors.greenAccent,
                                 ),

@@ -20,18 +20,18 @@ class PostView extends StatelessWidget {
         );
       },
       child: Container(
-        alignment: Alignment.center,
-        color: Colors.black,
+        //alignment: Alignment.center,
+        color: Colors.white,
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.85,
         child: Stack(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Container(
-                color: Colors.greenAccent,
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height *0.6,
+                height: MediaQuery.of(context).size.height *0.85,
                 child: Image.asset(
                   info.photo,
                   fit: BoxFit.cover,
@@ -40,14 +40,13 @@ class PostView extends StatelessWidget {
             ),
             Positioned(
               bottom: 10,
-              left: 10,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.only(topRight: Radius.circular(10), bottomRight: Radius.circular(10)),
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   height: MediaQuery.of(context).size.height *0.15,
-                  width: MediaQuery.of(context).size.width *0.5,
-                  color: const Color(0xa0000000),
+                  width: MediaQuery.of(context).size.width *0.8,
+                  color: const Color(0xc0ffffff),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -66,9 +65,9 @@ class PostView extends StatelessWidget {
                               Text(
                                 info.name,
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                 ),
                               ),
                               SizedBox(height: 5,),
@@ -76,7 +75,7 @@ class PostView extends StatelessWidget {
                                 info.date,
                                 style: TextStyle(
                                   fontSize: 15,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
@@ -88,8 +87,8 @@ class PostView extends StatelessWidget {
                       Text(
                         info.body,
                         style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
+                          fontSize: 15,
+                          color: Colors.black,
                         ),
                       ),
                     ],

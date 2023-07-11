@@ -17,7 +17,7 @@ class _Profile extends State<Profile> {
       body: Column(
         children: [
           Container(
-            height: 285,
+            height: 275,
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -39,26 +39,41 @@ class _Profile extends State<Profile> {
                     fit: BoxFit.cover
                   ),
                 ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 200,
+                  color: Colors.black45,
+                ),
                 Positioned(
                   top: 150,
-                  left: MediaQuery.of(context).size.width / 2 - 50,
-                  child: Column(
+                  left: 20,
+                  child: Row(
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: Image.asset(
-                          "assets/images/profile_default.png",
-                          height: 100,
-                          width: 100,
-                        )
+                      Image.asset(
+                        "assets/images/profile_default.png",
+                        height: 100,
+                        width: 100,
                       ),
-                      SizedBox(height: 10),
-                      Text("김현호"),
+                      SizedBox(width: 20,),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "김현호",
+                            style: TextStyle(fontSize: 25, fontWeight:FontWeight.bold, color: Colors.white),
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            "173cm, 59kg, 운동 좋아합니다",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
                 Positioned(
-                  top: 10,
+                  top: 20,
                   left: 20,
                   child: Text(
                     "누군가의 프로필",

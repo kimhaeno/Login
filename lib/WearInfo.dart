@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 enum WearType {
   top,
   pants,
-  shoes,
+  shoe,
   outer,
   acc,
   hat,

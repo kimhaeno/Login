@@ -13,6 +13,7 @@ class AddPostState extends ChangeNotifier {
   var wearList = List<WearInfo>.empty(growable: true);
   final brandController = TextEditingController();
   final wearController = TextEditingController();
+  final bodyController = TextEditingController();
   WearType? selectedWearType;
   final _wearTypes = ['상의', '하의', '신발', '아우터', '액세서리', '모자',];
 
@@ -93,45 +94,56 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            alignment: Alignment.center,
+            //alignment: Alignment.center,
             margin: EdgeInsets.all(10),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Stack(
-                  children: [ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Container(
-                      child: Container(
-                        height: 350,
-                        alignment: Alignment.center,
-                        child: _image != null ? Image.file(_image!, fit: BoxFit.cover,) :
-                        Text(
-                          '이미지를 선택해 주세요!',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      height: 400,
-                      color: Colors.black,
-
-                    ),
+                const SizedBox(height: 10,),
+                const Text(
+                  "착장 업로드",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   ),
-                  Positioned(
-                    bottom: 10,
-                    child: rrButton(
-                        pressFunc: _getImageFromGallery,
-                        text: '갤러리에서 이미지 선택'
-                    ),
-                  ),
-                  ]
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
-                    color: Colors.black,
+                    height: 400,
+                    color: Colors.black12,
+                    child: Container(
+                      height: 300,
+                      alignment: Alignment.center,
+                      child: _image != null ? Image.file(_image!, fit: BoxFit.fill,) :
+                      const Text(
+                        '이미지를 선택해 주세요!',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                ),
+                  ),
+                const SizedBox(height: 10,),
+                rrButton(
+                    pressFunc: _getImageFromGallery,
+                    text: '갤러리에서 이미지 선택'
+                ),
+                const SizedBox(height: 10,),
+                const Text(
+                  "의상 정보",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20
+                  ),
+                ),
+                const SizedBox(height: 10,),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    color: Colors.black12,
                     child: ListView.builder(
                       padding: const EdgeInsets.all(10),
                       shrinkWrap: true,
@@ -148,9 +160,18 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                         content: AddWear(),
+                                        backgroundColor: Colors.white,
                                         insetPadding: const EdgeInsets.all(5),
                                         actions: [
-                                          TextButton(
+                                          ElevatedButton(
+                                            style: OutlinedButton.styleFrom(
+                                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                                              shape: const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                              ),
+                                              backgroundColor: Colors.greenAccent,
+                                              foregroundColor: Colors.black,
+                                            ),
                                             onPressed: () {
                                               routeState.addList(WearInfo(
                                                   wearType: routeState
@@ -175,7 +196,14 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Container(
-                                  color: Colors.white,
+                                  alignment: Alignment.center,
+                                  color: Colors.black,
+                                  child: Text(
+                                    "눌러서 의상을 추가하세요",
+                                    style: TextStyle(
+                                      color: Colors.white
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -188,7 +216,29 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
+                const Text(
+                  "게시글 본문",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                    color: Colors.black12,
+                    child: TextField(
+                      controller: routeState.bodyController,
+                      decoration: InputDecoration(
+                        hintText: '자신의 이야기를 마음껏 적어주세요.'
+                      ),
+                    ),
+                  )
+                ),
+                const SizedBox(height:10),
                 rrButton(
                   pressFunc: _uploadImage,
                   text: '게시글 업로드',

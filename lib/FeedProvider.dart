@@ -36,7 +36,7 @@ class FeedProvider extends ChangeNotifier {
   }
 
   Future<void> started() async {
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 10; i++) {
       items.add(PostPreviewInfo(
           photo: 'assets/images/sample1.jpg',
           profile: 'assets/images/profile_default.png',
@@ -45,7 +45,7 @@ class FeedProvider extends ChangeNotifier {
           body: '내용을 입력'
       ));
     }
-    currentIndex = 20;
+    currentIndex = 10;
   }
 
   Future<void> _addItem() async {
@@ -53,7 +53,7 @@ class FeedProvider extends ChangeNotifier {
       isMore = true;
       notifyListeners();
       Future.delayed(const Duration(milliseconds: 3000), () {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
           items.add(PostPreviewInfo(
               photo: 'assets/images/sample1.jpg',
               profile: 'assets/images/profile_default.png',
@@ -62,7 +62,7 @@ class FeedProvider extends ChangeNotifier {
               body: '내용을 입력'
           ));
         }
-        currentIndex = currentIndex + 20;
+        currentIndex = currentIndex + 10;
         isMore = false;
         notifyListeners();
       });
