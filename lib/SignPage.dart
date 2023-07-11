@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_socket_channel/web_socket_channel.dart'; // 추가
 
 
 class SignPage extends StatelessWidget {
@@ -6,8 +7,27 @@ class SignPage extends StatelessWidget {
 
   final nicknameController = TextEditingController();
   final phoneController = TextEditingController();
-  final mailController = TextEditingController();
+  final pwController = TextEditingController();
 
+  //
+  void sendMessage((String, String, String) message) {
+    print(message);
+    
+    WebSocketChannel channel;
+    
+    try {
+      channel = WebSocketChannel.connect(Uri.parse('ws://localhost:3000'));
+      channel.sink.add(message);
+
+      channel.stream.listen((message) {
+        print(message);
+        channel.sink.close();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+  //
 
   @override
   Widget build(BuildContext context) {
@@ -58,19 +78,20 @@ class SignPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height:10),
-                  const Text("이메일"),
+                  const Text("비밀번호"),
                   const SizedBox(height:10),
                   SizedBox(
                     width: 300,
                     child: TextField(
-                      controller: mailController,
+                      controller: pwController,
                     ),
                   ),
                   const SizedBox(height:60),
                   TextButton(
-
                     onPressed: (){
-
+                      if (nicknameController.text.isNotEmpty && phoneController.text.isNotEmpty && pwController.text.isNotEmpty){
+                        sendMessage((phoneController.text, pwController.text, nicknameController.text)); 
+                      }
                     },
                     child: const Text(
                       "가입",
