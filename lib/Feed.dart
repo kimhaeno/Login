@@ -35,7 +35,7 @@ class _Feed extends State<Feed> {
                                   horizontal: 5, vertical: 6),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: PostView(),
+                                child: PostView(info: value.items[index]),
                               ),
                             ),
                             if (value.isMore && value.currentIndex == index + 1) ...[

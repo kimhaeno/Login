@@ -6,10 +6,10 @@ class PostPreviewInfo {
   late String body;
 
 
-  WearInfo ({required Enum wearType,  required String brandName, required String wearName}){
-    this.wearType = wearType;
-    this.brandName = brandName;
-    this.wearName = wearName;
-  }
+  PostPreviewInfo ({required this.photo,
+    required this.profile,
+    required this.name,
+    required this.date,
+    required this.body});
 
 }
