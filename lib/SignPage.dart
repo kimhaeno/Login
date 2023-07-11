@@ -91,6 +91,7 @@ class SignPage extends StatelessWidget {
                     onPressed: (){
                       if (nicknameController.text.isNotEmpty && phoneController.text.isNotEmpty && pwController.text.isNotEmpty){
                         sendMessage((phoneController.text, pwController.text, nicknameController.text)); 
+                        Navigator.pushNamed(context, '/home'); // 로그인 후 홈 화면으로 이동
                       }
                     },
                     child: const Text(
