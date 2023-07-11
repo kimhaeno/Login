@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:web_socket_channel/web_socket_channel.dart'; // 추가
 
+import 'HomePage.dart';
+//import 'package:web_socket_channel/web_socket_channel.dart'; // 추가
+import 'db_implement.dart';
 
 class SignPage extends StatelessWidget {
   SignPage({ Key? key }) : super(key: key);
@@ -9,7 +11,7 @@ class SignPage extends StatelessWidget {
   final phoneController = TextEditingController();
   final pwController = TextEditingController();
 
-  //
+/*
   void sendMessage((String, String, String) message) {
     print(message);
     
@@ -27,7 +29,7 @@ class SignPage extends StatelessWidget {
       print(e);
     }
   }
-  //
+*/
 
   @override
   Widget build(BuildContext context) {
@@ -88,11 +90,11 @@ class SignPage extends StatelessWidget {
                   ),
                   const SizedBox(height:60),
                   TextButton(
-                    onPressed: (){
-                      if (nicknameController.text.isNotEmpty && phoneController.text.isNotEmpty && pwController.text.isNotEmpty){
-                        sendMessage((phoneController.text, pwController.text, nicknameController.text)); 
-                        Navigator.pushNamed(context, '/home'); // 로그인 후 홈 화면으로 이동
-                      }
+                    onPressed: () async {
+                      await dbCreateAccount(nicknameController.text, phoneController.text, pwController.text);
+                      // TODO: => 다음에 UserProfile 대신에 메인 페이지를 입력하면 된다.
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute( // 페이지 전부 없애고 메인 페이지로 이동
+                        builder: (BuildContext context) => HomePage()), (route) => false);
                     },
                     child: const Text(
                       "가입",

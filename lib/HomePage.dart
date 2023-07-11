@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
+import 'package:login/AddPost.dart';
 import 'package:login/Feed.dart';
 import 'package:login/Profile.dart';
-import 'package:login/AddPost.dart';
-import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({ Key? key }) : super(key: key);

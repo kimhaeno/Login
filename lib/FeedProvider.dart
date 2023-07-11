@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login/PostPreviewInfo.dart';
 
+import 'db_implement.dart';
+
 class FeedProvider extends ChangeNotifier {
   List<PostPreviewInfo> items = [];
   int currentIndex = 0;
@@ -40,7 +42,7 @@ class FeedProvider extends ChangeNotifier {
       items.add(PostPreviewInfo(
           photo: 'assets/images/sample1.jpg',
           profile: 'assets/images/profile_default.png',
-          name: '김현호',
+          name: await dbCheckUserAccount(),
           date: '2023.07.11',
           body: '내용을 입력'
       ));
