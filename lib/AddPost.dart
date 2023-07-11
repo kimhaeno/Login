@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:login/WearInfo.dart';
 
 class UploadPhotoScreen extends StatefulWidget {
   @override
@@ -9,6 +10,11 @@ class UploadPhotoScreen extends StatefulWidget {
 
 class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
   File? _image;
+
+  List<int> wearList = List<int>.filled(5,0,growable: true);
+
+
+
 
   Future<void> _uploadImage() async {
     if (_image == null) {
@@ -48,6 +54,8 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
 
     final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
 
+
+
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
@@ -57,6 +65,9 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text('게시글 업로드'),
@@ -91,8 +102,33 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                 text: '갤러리에서 이미지 선택'
               ),
               SizedBox(height: 10,),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: ListView.builder(
+                    itemCount: wearList.length + 1,
+                    itemBuilder: (BuildContext context, int index) {
+                      if(index == wearList.length){
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            color: Colors.black,
+                            height: 30,
+                          ),
+                        );
+                      }
+                      else{
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            color: Colors.blue,
+                            height: 30,
+                          ),
+                        );
+                      }
+                    }
+                  ),
+                ),
               ),
               SizedBox(height: 10,),
               rrButton(
