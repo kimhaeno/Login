@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login/PostPreviewInfo.dart';
+import 'package:login/PostInfo.dart';
 
 class FeedProvider extends ChangeNotifier {
   List<PostPreviewInfo> items = [];

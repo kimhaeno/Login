@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login/PostDetailedPage.dart';
-import 'package:login/PostPreviewInfo.dart';
+import 'package:login/PostInfo.dart';
 
 class PostView extends StatelessWidget {
   PostView({
@@ -16,22 +16,33 @@ class PostView extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => PostDetailedPage()),
+          MaterialPageRoute(builder: (context) => PostDetailedPage(preinfo: info)),
         );
       },
       child: Container(
-        //alignment: Alignment.center,
-        color: Colors.white,
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.85,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        width: MediaQuery.of(context).size.width * 0.85,
+        height: MediaQuery.of(context).size.height * 0.8,
+        decoration: BoxDecoration(
+          color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 3,
+                blurRadius: 2,
+                offset: Offset(5,5),
+              ),
+            ]
+        ),
         child: Stack(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height *0.85,
+                width: MediaQuery.of(context).size.width * 0.85,
+                height: MediaQuery.of(context).size.height *0.80,
                 child: Image.asset(
                   info.photo,
                   fit: BoxFit.cover,
@@ -39,13 +50,13 @@ class PostView extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 10,
+              bottom: 15,
               child: ClipRRect(
                 borderRadius: BorderRadius.only(topRight: Radius.circular(10), bottomRight: Radius.circular(10)),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  height: MediaQuery.of(context).size.height *0.15,
-                  width: MediaQuery.of(context).size.width *0.8,
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  height: 120,
+                  width: MediaQuery.of(context).size.width *0.65,
                   color: const Color(0xc0ffffff),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -64,7 +64,7 @@ class _Profile extends State<Profile> {
                           ),
                           SizedBox(height: 20),
                           Text(
-                            "173cm, 59kg, 운동 좋아합니다",
+                            "락시크, R&B, 운동 좋아합니다",
                             style: TextStyle(fontSize: 15),
                           ),
                         ],
@@ -84,10 +84,20 @@ class _Profile extends State<Profile> {
                     ),
                   ),
                 ),
+                Positioned(
+                  top: 20,
+                  right: 20,
+                  child: IconButton(
+                    icon: Icon(Icons.create),
+                    onPressed: (){
+                      //(context) => ChangeInfo();
+                    },
+                  )
+                )
               ],
             ),
           ),
-          Expanded(child: PhotoGridView()),
+          Expanded(child: PhotoGridView(userId: "todo")),
         ],
       )
     );

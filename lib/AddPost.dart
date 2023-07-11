@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:login/PostInfo.dart';
 import 'package:login/WearInfo.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +33,7 @@ class AddPostState extends ChangeNotifier {
 class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
   File? _image;
 
-  Future<void> _uploadImage() async {
+  Future<void> _uploadPost() async {
     if (_image == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('이미지를 선택해주세요.')),
@@ -40,19 +41,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
       return;
     }
 
-    // 이미지 업로드 로직을 추가하십시오.
-    // 여기에서는 이미지를 서버로 업로드하고 성공 여부에 따라 스낵바 메시지를 표시합니다.
     try {
-      // TODO: 이미지 업로드 로직 추가
-      // 예시:
-      // 업로드 성공 시:
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(content: Text('이미지가 성공적으로 업로드되었습니다.')),
-      // );
-      // 업로드 실패 시:
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(content: Text('이미지 업로드에 실패했습니다.')),
-      // );
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('업로드합니다')),
@@ -114,9 +103,8 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                     height: 400,
                     color: Colors.black12,
                     child: Container(
-                      height: 300,
                       alignment: Alignment.center,
-                      child: _image != null ? Image.file(_image!, fit: BoxFit.fill,) :
+                      child: _image != null ? Image.file(_image!, fit: BoxFit.cover,) :
                       const Text(
                         '이미지를 선택해 주세요!',
                         style: TextStyle(
@@ -173,14 +161,16 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                                               foregroundColor: Colors.black,
                                             ),
                                             onPressed: () {
-                                              routeState.addList(WearInfo(
-                                                  wearType: routeState
-                                                      .selectedWearType!,
-                                                  brandName: routeState
-                                                      .brandController.text,
-                                                  wearName: routeState
-                                                      .wearController.text));
-                                              Navigator.pop(context);
+                                              setState((){
+                                                routeState.addList(WearInfo(
+                                                    wearType: routeState
+                                                        .selectedWearType!,
+                                                    brandName: routeState
+                                                        .brandController.text,
+                                                    wearName: routeState
+                                                        .wearController.text));
+                                                Navigator.pop(context);
+                                              });
                                             },
                                             child: const Text("의상 추가"),
                                           )
@@ -201,7 +191,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                                   child: Text(
                                     "눌러서 의상을 추가하세요",
                                     style: TextStyle(
-                                      color: Colors.white
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
@@ -228,19 +218,26 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     color: Colors.black12,
                     child: TextField(
+                      cursorColor: Colors.black,
+
+                      maxLines: null,
+                      keyboardType: TextInputType.multiline,
                       controller: routeState.bodyController,
-                      decoration: InputDecoration(
-                        hintText: '자신의 이야기를 마음껏 적어주세요.'
+                      decoration: const InputDecoration(
+                        hintText: '자신의 이야기를 마음껏 적어주세요.',
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
                       ),
                     ),
                   )
                 ),
                 const SizedBox(height:10),
                 rrButton(
-                  pressFunc: _uploadImage,
+                  pressFunc: _uploadPost,
                   text: '게시글 업로드',
                 ),
               ],
@@ -286,11 +283,12 @@ class rrButton extends StatelessWidget {
 class wearWidget extends StatelessWidget{
   wearWidget({Key? key, required this.info}) : super(key: key);
   final WearInfo info;
+  final wearTypes = ['상의', '하의', '신발', '아우터', '액세서리', '모자',];
 
   @override
   Widget build(BuildContext context){
     return Container(
-      height: 70,
+      height: 90,
       padding: const EdgeInsets.all(5),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -298,20 +296,36 @@ class wearWidget extends StatelessWidget{
           padding: const EdgeInsets.all(5),
           color: Colors.white,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              const SizedBox(width: 10,),
               Container(
-                width: 60,
-                height: 60,
+                width: 80,
+                height: 80,
                 child: Image.asset(
                   "assets/images/${info.wearType.toString().split('.')[1]}_b.png",
                   fit:BoxFit.fill
                 ),
               ),
+              const SizedBox(width: 20,),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(info.brandName),
+                  Text(
+                    wearTypes[info.wearType.index],
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   const SizedBox(height: 10),
-                  Text(info.wearName),
+                  Text(
+                    info.brandName + " / " + info.wearName,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w200,
+                    ),
+                  ),
                 ],
               ),
             ],

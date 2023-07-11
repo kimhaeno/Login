@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 
 class PhotoGridView extends StatelessWidget {
+  PhotoGridView ({super.key, required this.userId});
+
+  String userId;
+
   final List<String> images = [
     'https://images.pexels.com/photos/2859616/pexels-photo-2859616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     'https://images.pexels.com/photos/2859616/pexels-photo-2859616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
