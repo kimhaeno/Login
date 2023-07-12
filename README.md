@@ -1,12 +1,17 @@
-# Madcamp_Week2_Frontend
+# 2023학년도 여름학기 몰입캠프
+## 2주차 프로젝트
+- **분반** : 3
+- **팀원** : 김현호, 송민지
+- **프로젝트 이름** : FAS#N
+- **프로젝트 설명**
 
-### 현재 완료된 것
-- Login화면
-- 회원가입 화면
-- 피드 infinitescroll
-- BottomNaviationBar
+  - **사용 tool** : 서버 - Node.js / DB - MySQL / 앱 개발 - Flutter
+    
+    
+  - **프로젝트 기능 요약** : 패션 정보 공유 앱
+ 
+    
+  - **상세 설명**
+    
 
-### TODO:
-- Flutter Splash: 4x pixel image 만들어서 시험해보기
-- Profile page 설정
-- 회원가입 UI (container width 설정했는데 이러는 이유를 아직 모르겠음)
+  - **스크린샷 (3장 이상)**
