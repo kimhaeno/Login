@@ -41,7 +41,7 @@
 
 ## 4. 게시글 업로드
 
-<img src="week2/upload1.png" width="300" height="400" alt="login"></img> <img src="week2/upload2.png" width="300" height="400" alt="login"></img> <img src="week2/upload3.png" width="300" height="400" alt="login"></img>
+<img src="week2/upload.png" width="300" height="400" alt="login"></img> <img src="week2/upload2.png" width="300" height="400" alt="login"></img> <img src="week2/upload3.png" width="300" height="400" alt="login"></img>
 
 - 이미지 1장, 입은 옷의 정보, 글의 본문을 작성 가능
 - 입은 옷 정보는 AlertDialog 사용해서 작성, 리스트레 계속 추가 가능
