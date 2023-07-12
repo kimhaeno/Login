@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login/PhotoGridView.dart';
+import 'package:login/ChangeInfo.dart';
 
 class Profile extends StatefulWidget {
   Profile({ Key? key}) : super(key: key);
@@ -89,8 +90,10 @@ class _Profile extends State<Profile> {
                   right: 20,
                   child: IconButton(
                     icon: Icon(Icons.create),
+                    color: Colors.white,
                     onPressed: (){
-                      //(context) => ChangeInfo();
+                      Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ChangeInfo()));
                     },
                   )
                 )

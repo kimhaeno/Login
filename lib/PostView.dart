@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login/PostDetailedPage.dart';
 import 'package:login/PostInfo.dart';
+import 'package:login/dateManager.dart';
 
 class PostView extends StatelessWidget {
   PostView({
@@ -12,6 +13,10 @@ class PostView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    String date = dateManager(info.date);
+
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -83,7 +88,7 @@ class PostView extends StatelessWidget {
                               ),
                               SizedBox(height: 5,),
                               Text(
-                                info.date,
+                                date,
                                 style: TextStyle(
                                   fontSize: 15,
                                   color: Colors.black,

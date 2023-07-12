@@ -18,7 +18,7 @@ class FeedProvider extends ChangeNotifier {
               photo: 'assets/images/sample1.jpg',
               profile: 'assets/images/profile_default.png',
               name: '김현호',
-              date: '2023.07.11',
+              date: DateTime.now(),
               body: '내용을 입력'
           ));
         }
@@ -41,7 +41,7 @@ class FeedProvider extends ChangeNotifier {
           photo: 'assets/images/sample1.jpg',
           profile: 'assets/images/profile_default.png',
           name: '김현호',
-          date: '2023.07.11',
+          date: DateTime.now(),
           body: '내용을 입력zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
       ));
     }
@@ -58,7 +58,7 @@ class FeedProvider extends ChangeNotifier {
               photo: 'assets/images/sample1.jpg',
               profile: 'assets/images/profile_default.png',
               name: '김현호',
-              date: '2023.07.11',
+              date: DateTime.now(),
               body: '내용을 입력'
           ));
         }

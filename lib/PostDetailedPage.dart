@@ -100,7 +100,7 @@ class _PostDetailedPageState extends State<PostDetailedPage> {
                               ),
                               SizedBox(height: 5,),
                               Text(
-                                widget.preinfo.date,
+                                widget.preinfo.date.toString(),
                                 style: const TextStyle(
                                   fontSize: 15,
                                   color: Colors.black,

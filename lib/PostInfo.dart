@@ -5,7 +5,7 @@ class PostPreviewInfo {
   late String photo;
   late String profile;
   late String name;
-  late String date;
+  late DateTime date;
   late String body;
   late String postId;
 
@@ -23,7 +23,7 @@ class PostPreviewInfo {
 class PostInfo {
   late String photo;
   late String uploader;
-  late String date;
+  late DateTime date;
   late String body;
   late String postId;
   late List<WearInfo> wearList;
