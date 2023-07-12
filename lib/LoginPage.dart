@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:login/main.dart';
 import 'package:provider/provider.dart';
-import 'package:login/SignPage.dart';
-import 'package:login/HomePage.dart';
+
+import '../services/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({ Key? key }) : super(key: key);
+  //const LoginPage({ Key? key }) : super(key: key);
+    const LoginPage(
+      {Key? key,
+      required this.setLoadingState,
+      required this.setAuthenticatedState,
+      required this.setUnauthenticatedState})
+      : super(key: key);
+
+  final VoidCallback setLoadingState;
+  final VoidCallback setAuthenticatedState;
+  final VoidCallback setUnauthenticatedState;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -102,7 +112,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       SizedBox(height: 10),
                       OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            loginAction;
+                          },
                           child: Text("구글 로그인")
                       ),
                     ],
@@ -112,5 +124,15 @@ class _LoginPageState extends State<LoginPage> {
           ),
         )
     );
+  }
+
+  Future<void> loginAction() async {
+    widget.setLoadingState();
+    final authSuccess = await AuthService.instance.login();
+    if (authSuccess) {
+      widget.setAuthenticatedState();
+    } else {
+      widget.setUnauthenticatedState();
+    }
   }
 }

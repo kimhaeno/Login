@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:login/FeedProvider.dart';
 import 'package:login/PostView.dart';
+import 'package:provider/provider.dart';
 
 class Feed extends StatefulWidget {
   Feed({ Key? key }) : super(key: key);
@@ -19,7 +19,7 @@ class _Feed extends State<Feed> {
         return Scaffold(
           body: NotificationListener<ScrollUpdateNotification>(
             onNotification: (ScrollUpdateNotification notification) {
-              value.listner(notification);
+              value.listener(notification);
               return false;
             },
             child: Column(

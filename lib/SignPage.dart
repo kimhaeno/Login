@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'HomePage.dart';
-//import 'package:web_socket_channel/web_socket_channel.dart'; // 추가
 import 'db_implement.dart';
 
 class SignPage extends StatelessWidget {
@@ -10,26 +9,6 @@ class SignPage extends StatelessWidget {
   final nicknameController = TextEditingController();
   final phoneController = TextEditingController();
   final pwController = TextEditingController();
-
-/*
-  void sendMessage((String, String, String) message) {
-    print(message);
-    
-    WebSocketChannel channel;
-    
-    try {
-      channel = WebSocketChannel.connect(Uri.parse('ws://localhost:3000'));
-      channel.sink.add(message);
-
-      channel.stream.listen((message) {
-        print(message);
-        channel.sink.close();
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
-*/
 
   @override
   Widget build(BuildContext context) {
