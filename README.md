@@ -28,6 +28,8 @@
 
 <img src="week2/feed.png" width="300" height="400" alt="login"></img>
 
+-횡스크롤으로 게시글을 보면서 의상 착장을 더욱 자세히 볼 수 있음
+
 ## 3. 게시글 상세
 
 <img src="week2/post1.png" width="300" height="400" alt="login"></img> <img src="week2/post2.png" width="300" height="400" alt="login"></img> <img src="week2/post3.png" width="300" height="400" alt="login"></img>
@@ -39,6 +41,13 @@
 
 ## 4. 게시글 업로드
 
+<img src="week2/upload1.png" width="300" height="400" alt="login"></img> <img src="week2/upload2.png" width="300" height="400" alt="login"></img> <img src="week2/upload3.png" width="300" height="400" alt="login"></img>
+
 - 이미지 1장, 입은 옷의 정보, 글의 본문을 작성 가능
+- 입은 옷 정보는 AlertDialog 사용해서 작성, 리스트레 계속 추가 가능
 
 ## 5. 프로필
+
+<img src="week2/profile.png" width="300" height="400" alt="login"></img>
+
+- 자신이 쓴 글들을 gridView 사용해서 볼 수 있고, 개인정보를 게시 가능
