@@ -16,7 +16,7 @@
 
   - **스크린샷 (3장 이상)**
 
-<img src="week2/login.png" width="250" height="480" alt="login"></img><br/>
+<img src="week2/login.png" width="300" height="480" alt="login"></img><br/>
 
 
 
