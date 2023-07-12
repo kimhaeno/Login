@@ -19,7 +19,7 @@ class _Feed extends State<Feed> {
         return Scaffold(
           body: NotificationListener<ScrollUpdateNotification>(
             onNotification: (ScrollUpdateNotification notification) {
-              value.listner(notification);
+              value.listener(notification);
               return false;
             },
             child: Column(
@@ -34,7 +34,7 @@ class _Feed extends State<Feed> {
                             Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 6),
-                              child: PostView(info: value.items[index]),
+                              child: PostView(idx: value.items[index]),
 
                             ),
                             if (value.isMore && value.currentIndex == index + 1) ...[

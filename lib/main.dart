@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:login/SignPage.dart';
-import 'package:login/HomePage.dart';
-import 'package:login/LoginPage.dart';
 import  'package:login/AddPost.dart';
+import 'package:login/HomePage.dart';
+import 'package:login/SignPage.dart';
+import 'package:provider/provider.dart';
 
-import 'dart:io';
+import 'LoginPage.dart';
 
 void main() {
   //이거 수상함
@@ -26,10 +24,15 @@ void main() {
 }
 
 class MyAppState extends ChangeNotifier {
-  var id = "";
+  var userId = "id5";
 
-  void getId(){
+  void setUserId(String id){
+    userId = id;
     notifyListeners();
+  }
+
+  String getUserId(){
+    return userId;
   }
 }
 
@@ -48,7 +51,7 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => LoginPage(),
+          '/': (context) => LoginPage(setAuthenticatedState: () { Null; }, setLoadingState: () { Null; }, setUnauthenticatedState: () { Null; },),
           '/sign': (context) => SignPage(),
           '/home': (context) => HomePage(),
         },
@@ -56,12 +59,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-

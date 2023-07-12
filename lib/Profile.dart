@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:login/PhotoGridView.dart';
+import 'package:login/db_implement.dart';
+import 'package:login/main.dart';
+import 'package:provider/provider.dart';
 import 'package:login/ChangeInfo.dart';
 
 class Profile extends StatefulWidget {
-  Profile({ Key? key}) : super(key: key);
+  const Profile({ Key? key }) : super(key: key);
 
   @override
   State<Profile> createState() => _Profile();
@@ -13,6 +16,8 @@ class _Profile extends State<Profile> {
 
   @override
   Widget build(BuildContext context){
+  var appState = context.watch<MyAppState>();
+
 
     return Scaffold(
       body: Column(
@@ -59,14 +64,67 @@ class _Profile extends State<Profile> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "김현호",
-                            style: TextStyle(fontSize: 25, fontWeight:FontWeight.bold, color: Colors.white),
+                          FutureBuilder(
+                            future: dbGetUserNameInfo(appState.getUserId()),
+                            builder: (BuildContext context, AsyncSnapshot snapshot) {
+                              //해당 부분은 data를 아직 받아 오지 못했을 때 실행되는 부분
+                              if (snapshot.hasData == false) {
+                                return CircularProgressIndicator(); // CircularProgressIndicator : 로딩 에니메이션
+                              }
+
+                              //error가 발생하게 될 경우 반환하게 되는 부분
+                              else if (snapshot.hasError) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+
+                                  child: Text(
+                                    'Error: ${snapshot.error}', // 에러명을 텍스트에 뿌려줌
+                                    style: TextStyle(fontSize: 25, fontWeight:FontWeight.bold, color: Colors.white),
+                                  ),
+                                );
+                              }
+
+                              // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 부분
+                              else {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+
+                                  child: Text(
+                                    snapshot.data.toString(), // 비동기 처리를 통해 받은 데이터를 텍스트에 뿌려줌
+                                    style: TextStyle(fontSize: 25, fontWeight:FontWeight.bold, color: Colors.white),
+                                  ),
+                                );
+                              }
+                            }
                           ),
                           SizedBox(height: 20),
-                          Text(
-                            "락시크, R&B, 운동 좋아합니다",
-                            style: TextStyle(fontSize: 15),
+                          FutureBuilder(
+                            future: dbGetUserExpInfo(appState.getUserId()),
+                            builder: (BuildContext context, AsyncSnapshot snapshot) {
+                              //error가 발생하게 될 경우 반환하게 되는 부분
+                              if (snapshot.hasError) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+
+                                  child: Text(
+                                    'Error: ${snapshot.error}', // 에러명을 텍스트에 뿌려줌
+                                    style: TextStyle(fontSize: 25, fontWeight:FontWeight.bold, color: Colors.white),
+                                  ),
+                                );
+                              }
+
+                              // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 부분
+                              else {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+
+                                  child: Text(
+                                    snapshot.data.toString(), // 비동기 처리를 통해 받은 데이터를 텍스트에 뿌려줌
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                );
+                              }
+                            }
                           ),
                         ],
                       ),
@@ -77,7 +135,7 @@ class _Profile extends State<Profile> {
                   top: 20,
                   left: 20,
                   child: Text(
-                    "누군가의 프로필",
+                    "프로필",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,

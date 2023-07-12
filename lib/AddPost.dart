@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'package:login/main.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login/PostInfo.dart';
 import 'package:login/WearInfo.dart';
+import 'package:login/db_implement.dart';
 import 'package:provider/provider.dart';
 
 class UploadPhotoScreen extends StatefulWidget {
@@ -32,7 +34,6 @@ class AddPostState extends ChangeNotifier {
 
 class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
   File? _image;
-
   Future<void> _uploadPost() async {
     if (_image == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -41,7 +42,28 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
       return;
     }
 
+    // 이미지 업로드 로직을 추가하십시오.
+    // 여기에서는 이미지를 서버로 업로드하고 성공 여부에 따라 스낵바 메시지를 표시합니다.
     try {
+      // TODO: 이미지 업로드 로직 추가
+      // 예시:
+      // 업로드 성공 시:
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(content: Text('이미지가 성공적으로 업로드되었습니다.')),
+      // );
+      // 업로드 실패 시:
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(content: Text('이미지 업로드에 실패했습니다.')),
+      // );
+
+      var postState = context.watch<AddPostState>();
+      var appState = context.watch<MyAppState>();
+
+      int postId = dbUploadPost( ,appState.getUserId());
+
+      for(int i = 0; i < postState.wearList.length; i++){
+        dbUploadWear(postState.wearList[i], postId);
+      }
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('업로드합니다')),
