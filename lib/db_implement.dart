@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:login/PostPreviewInfo.dart';
 import 'package:login/WearInfo.dart';
@@ -110,24 +112,21 @@ Future<PostPreviewInfo?> dbGetPreviewPostInfo(int id) async {
 }
 
 // 게시글 업로드 후 postId 반환
-Future<int> dbUploadPost(int postId, ) async {
+Future<int> dbUploadPost(File image, String body, int postId) async {
   Dio dio = Dio();
-  Enum wearType = info.wearType;
-  String brandName = info.brandName;
-  String wearName = info.wearName;
-  
   try {
-    var response1 = await dio.post("$serverAddress/dbUploadWear", data: {
-      'wearType': wearType,
-      'brandName': brandName,
-      'wearName': wearName,
+    var response1 = await dio.post("$serverAddress/dbUploadPost", data: {
+      'image': image,
+      'body': body,
       'postId': postId});
     if (response1.statusCode == 200) {
-      print("dbUploadWear : 의상 정보 서버 전송 성공");
+      print("dbUploadPost : postId 반환 성공");
+      return postId;
     }
   } catch (e) {
-    print("[error] dbUploadWear : $e");
+    print("[error] dbUploadPost : $e");
   }
+  return -1;
 }
 
 // 게시글 내의 의상정보를 서버에 업로드
