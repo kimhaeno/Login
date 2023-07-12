@@ -59,7 +59,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
       var postState = context.watch<AddPostState>();
       var appState = context.watch<MyAppState>();
 
-      int postId = dbUploadPost( ,appState.getUserId());
+      int postId = 1;// dbUploadPost( ,appState.getUserId());
 
       for(int i = 0; i < postState.wearList.length; i++){
         dbUploadWear(postState.wearList[i], postId);

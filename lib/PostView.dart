@@ -43,40 +43,43 @@ class PostView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    String date = dateManager(info.date);
 
 
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => PostDetailedPage(preinfo: info)),
-        );
-      },
-      child: FutureBuilder(
 
-        future: dbGetPreviewPostInfo(idx),
-        builder: (context, snapshot) {
+    return FutureBuilder(
 
-        PostPreviewInfo info;
-        if (snapshot.connectionState == ConnectionState.waiting){
+      future: dbGetPreviewPostInfo(idx),
+      builder: (context, snapshot) {
+
+      PostPreviewInfo info;
+
+      if (snapshot.connectionState == ConnectionState.waiting){
         return CircularProgressIndicator();
-        }
+      }
 
 
-        if(snapshot.hasData)
-          info = snapshot.data!;
-        else
-          info = PostPreviewInfo(
-            name: "",
-            date: "",
-            body: "",
-            photo: 'assets/images/sample1.jpg',
-            profile: 'assets/images/profile_default.png',
-            succeed: false,
+      if(snapshot.hasData)
+        info = snapshot.data!;
+      else
+        info = PostPreviewInfo(
+          name: "",
+          date: DateTime.now(),
+          body: "",
+          photo: 'assets/images/sample1.jpg',
+          profile: 'assets/images/profile_default.png',
+          succeed: false,
+        );
+
+      String date = dateManager(info.date);
+
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PostDetailedPage(preinfo: info)),
           );
-
-        return Container(
+        },
+        child: Container(
           //alignment: Alignment.center,
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -169,8 +172,8 @@ class PostView extends StatelessWidget {
               ),
             ],
           ),
-        );},
-      ),
+        ),
+      );},
     );
   }
 }

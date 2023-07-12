@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:login/PostPreviewInfo.dart';
+import 'package:login/PostInfo.dart';
 import 'package:login/WearInfo.dart';
 
 //import 'login.dart';
@@ -87,7 +87,7 @@ Future<PostPreviewInfo?> dbGetPreviewPostInfo(int id) async {
       if (response.statusCode == 200) {
         return PostPreviewInfo(
           name: response.data[0]['phone'],
-          date: response.data[0]['date'],
+          date: DateTime.parse(response.data[0]['date']),
           body: response.data[0]['content'],
           photo: 'assets/images/sample1.jpg',
           profile: 'assets/images/profile_default.png',
@@ -95,13 +95,12 @@ Future<PostPreviewInfo?> dbGetPreviewPostInfo(int id) async {
         );
       }
     } catch (e) {
-      print("aaaaaaaaaaaaaaaaaaaaaaaaa");
       print(e);
     }
   }
   return PostPreviewInfo(
-    name: "66",
-    date: "",
+    name: "err",
+    date: DateTime.now(),
     body: "",
     photo: 'assets/images/sample1.jpg',
     profile: 'assets/images/profile_default.png',
@@ -110,6 +109,7 @@ Future<PostPreviewInfo?> dbGetPreviewPostInfo(int id) async {
 }
 
 // 게시글 업로드 후 postId 반환
+/*
 Future<int> dbUploadPost(int postId, ) async {
   Dio dio = Dio();
   Enum wearType = info.wearType;
@@ -128,7 +128,7 @@ Future<int> dbUploadPost(int postId, ) async {
   } catch (e) {
     print("[error] dbUploadWear : $e");
   }
-}
+}*/
 
 // 게시글 내의 의상정보를 서버에 업로드
 Future<void> dbUploadWear(WearInfo info, int postId) async {

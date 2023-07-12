@@ -203,6 +203,7 @@ class _PostDetailedPageState extends State<PostDetailedPage> {
                           fontSize: 15,
                         ),
                         maxLength: 150,
+                        maxLines: null,
                         keyboardType: TextInputType.multiline,
                         controller: commentController,
                         cursorColor: Colors.white,

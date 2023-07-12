@@ -8,6 +8,7 @@ class PostPreviewInfo {
   late DateTime date;
   late String body;
   late String postId;
+  late bool succeed;
 
 
   PostPreviewInfo ({required this.photo,
@@ -15,6 +16,7 @@ class PostPreviewInfo {
     required this.name,
     required this.date,
     required this.body,
+    required this.succeed,
     this.postId = "any",
   });
 
