@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login/PhotoGridView.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({ Key? key }) : super(key: key);
+  Profile({ Key? key}) : super(key: key);
 
   @override
   State<Profile> createState() => _Profile();

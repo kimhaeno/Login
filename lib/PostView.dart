@@ -97,6 +97,8 @@ class PostView extends StatelessWidget {
                       SizedBox(height: 10,),
                       Text(
                         info.body,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.black,

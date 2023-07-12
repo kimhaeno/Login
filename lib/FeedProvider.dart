@@ -42,7 +42,7 @@ class FeedProvider extends ChangeNotifier {
           profile: 'assets/images/profile_default.png',
           name: '김현호',
           date: '2023.07.11',
-          body: '내용을 입력'
+          body: '내용을 입력zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
       ));
     }
     currentIndex = 10;

@@ -1,7 +1,6 @@
 
 enum Rate {
   bad,
-  soso,
   good,
 }
 

@@ -78,6 +78,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
     return ChangeNotifierProvider(
       create: (context) => AddPostState(),
       child: Scaffold(
+        backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
           title: Text('게시글 업로드'),
         ),
@@ -101,7 +102,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
                     height: 400,
-                    color: Colors.black12,
+                    color: Colors.white,
                     child: Container(
                       alignment: Alignment.center,
                       child: _image != null ? Image.file(_image!, fit: BoxFit.cover,) :
@@ -131,7 +132,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
-                    color: Colors.black12,
+                    color: Colors.white,
                     child: ListView.builder(
                       padding: const EdgeInsets.all(10),
                       shrinkWrap: true,
@@ -148,7 +149,9 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                         content: AddWear(),
+                                        elevation: 20,
                                         backgroundColor: Colors.white,
+                                        surfaceTintColor: Colors.white,
                                         insetPadding: const EdgeInsets.all(5),
                                         actions: [
                                           ElevatedButton(
@@ -218,8 +221,8 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    color: Colors.black12,
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    color: Colors.white,
                     child: TextField(
                       cursorColor: Colors.black,
 
@@ -355,13 +358,18 @@ class _AddWearState extends State<AddWear> {
 
 
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(15),
       height: 290,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("의상 정보를 등록해 주세요!"),
+            Text(
+              "의상 정보를 등록해 주세요!",
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
             DropdownButton(
               value: selectedWearType,
               items: WearType.values.map((WearType wearType) {
@@ -374,6 +382,7 @@ class _AddWearState extends State<AddWear> {
                 routeState.setWearType(value!);
               },
             ),
+            SizedBox(height:10),
             Text("브랜드명"),
             SizedBox(height:10),
             TextField(
