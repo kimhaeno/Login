@@ -1,8 +1,9 @@
 import 'dart:io';
-
+import 'package:login/main.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login/WearInfo.dart';
+import 'package:login/db_implement.dart';
 import 'package:provider/provider.dart';
 
 class UploadPhotoScreen extends StatefulWidget {
@@ -32,7 +33,6 @@ class AddPostState extends ChangeNotifier {
 
 class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
   File? _image;
-
   Future<void> _uploadImage() async {
     if (_image == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -54,6 +54,15 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
       // ScaffoldMessenger.of(context).showSnackBar(
       //   SnackBar(content: Text('이미지 업로드에 실패했습니다.')),
       // );
+
+      var postState = context.watch<AddPostState>();
+      var appState = context.watch<MyAppState>();
+
+      int postId = dbUploadPost( ,appState.getUserId());
+
+      for(int i = 0; i < postState.wearList.length; i++){
+        dbUploadWear(postState.wearList[i], postId);
+      }
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('업로드합니다')),

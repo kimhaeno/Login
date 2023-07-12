@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:login/PostPreviewInfo.dart';
+import 'package:login/WearInfo.dart';
 
 //import 'login.dart';
 import 'strings.dart';
@@ -72,6 +74,81 @@ Future<String> dbGetUserExpInfo(String id) async {
     }
     }
   return "";
+}
+
+// 게시글 정보를 db에서 가져오기
+Future<PostPreviewInfo?> dbGetPreviewPostInfo(int id) async {
+  Dio dio = Dio();
+  int postId = id; //await kakaoGetUserInfo();
+  if (postId != 0) {
+    try {
+      var response = await dio.post(
+      "$serverAddress/dbGetPreviewPostInfo", data: {'postId': postId});
+      if (response.statusCode == 200) {
+        return PostPreviewInfo(
+          name: response.data[0]['phone'],
+          date: response.data[0]['date'],
+          body: response.data[0]['content'],
+          photo: 'assets/images/sample1.jpg',
+          profile: 'assets/images/profile_default.png',
+          succeed: true,
+        );
+      }
+    } catch (e) {
+      print("aaaaaaaaaaaaaaaaaaaaaaaaa");
+      print(e);
+    }
+  }
+  return PostPreviewInfo(
+    name: "66",
+    date: "",
+    body: "",
+    photo: 'assets/images/sample1.jpg',
+    profile: 'assets/images/profile_default.png',
+    succeed: false,
+  );
+}
+
+// 게시글 업로드 후 postId 반환
+Future<int> dbUploadPost(int postId, ) async {
+  Dio dio = Dio();
+  Enum wearType = info.wearType;
+  String brandName = info.brandName;
+  String wearName = info.wearName;
+  
+  try {
+    var response1 = await dio.post("$serverAddress/dbUploadWear", data: {
+      'wearType': wearType,
+      'brandName': brandName,
+      'wearName': wearName,
+      'postId': postId});
+    if (response1.statusCode == 200) {
+      print("dbUploadWear : 의상 정보 서버 전송 성공");
+    }
+  } catch (e) {
+    print("[error] dbUploadWear : $e");
+  }
+}
+
+// 게시글 내의 의상정보를 서버에 업로드
+Future<void> dbUploadWear(WearInfo info, int postId) async {
+  Dio dio = Dio();
+  Enum wearType = info.wearType;
+  String brandName = info.brandName;
+  String wearName = info.wearName;
+  
+  try {
+    var response1 = await dio.post("$serverAddress/dbUploadWear", data: {
+      'wearType': wearType,
+      'brandName': brandName,
+      'wearName': wearName,
+      'postId': postId});
+    if (response1.statusCode == 200) {
+      print("dbUploadWear : 의상 정보 서버 전송 성공");
+    }
+  } catch (e) {
+    print("[error] dbUploadWear : $e");
+  }
 }
 
 
