@@ -1,10 +1,10 @@
 import 'dart:io';
-import 'package:login/main.dart';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:login/PostInfo.dart';
 import 'package:login/WearInfo.dart';
 import 'package:login/db_implement.dart';
+import 'package:login/main.dart';
 import 'package:provider/provider.dart';
 
 class UploadPhotoScreen extends StatefulWidget {
@@ -59,7 +59,7 @@ class _UploadPhotoScreenState extends State<UploadPhotoScreen> {
       var postState = context.watch<AddPostState>();
       var appState = context.watch<MyAppState>();
 
-      int postId = dbUploadPost( ,appState.getUserId());
+      int postId = dbUploadPost(_image, AddPostState().bodyController.text, appState.getUserId());
 
       for(int i = 0; i < postState.wearList.length; i++){
         dbUploadWear(postState.wearList[i], postId);
