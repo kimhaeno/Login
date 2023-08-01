@@ -14,15 +14,10 @@
   - **상세 설명**
     
 
-  - **스크린샷 (3장 이상)**
-
-<img src="week2/login.png" width="300" height="400" alt="login"></img> <img src="week2/signin.png" width="300" height="400" alt="login"></img>
-
-
 
 ## 1. 로그인
 
--
+<img src="week2/login.png" width="300" height="400" alt="login"></img> <img src="week2/signin.png" width="300" height="400" alt="login"></img>
 
 ## 2. 피드
 
