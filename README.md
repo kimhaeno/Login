@@ -32,17 +32,17 @@
 - 게시글 내에서는 글을 끝까지 볼 수 있음
 - hot/ cold로 평가 가능
 - 선택적으로 댓글 남길 수 있음
-- 다른사람들의 댓글 볼 수 있음
+- 다른 사람들의 댓글 볼 수 있음
 
 ## 4. 게시글 업로드
 
 <img src="week2/upload.png" width="300" height="400" alt="login"></img> <img src="week2/upload2.png" width="300" height="400" alt="login"></img> <img src="week2/upload3.png" width="300" height="400" alt="login"></img>
 
 - 이미지 1장, 입은 옷의 정보, 글의 본문을 작성 가능
-- 입은 옷 정보는 AlertDialog 사용해서 작성, 리스트레 계속 추가 가능
+- 입은 옷 정보는 AlertDialog를 사용해서 작성, 리스트에 계속 추가 가능
 
 ## 5. 프로필
 
 <img src="week2/profile.png" width="300" height="400" alt="login"></img>
 
-- 자신이 쓴 글들을 gridView 사용해서 볼 수 있고, 개인정보를 게시 가능
+- 자신이 쓴 글들을 gridView를 사용해서 볼 수 있고, 개인정보를 게시 가능
